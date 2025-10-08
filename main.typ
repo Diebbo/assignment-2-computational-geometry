@@ -53,7 +53,7 @@ To prove that the total time is $O(n log h)$ we need to analyze each step of the
   We can see that the solution of this LP problem will give us the line with the maximum y-intercept that is above all the points, which is exactly what we want.
   Since we have $n$ constraints and we are in a 2 dimensional space, we can solve this LP problem in $O(n)$ time using Megiddo's algorithm.
 
-3. As is step 1, we need to iterate through all the point to remove all of them not satisfying the condition (being above the bridge, $y >= u_x x + u_y$). $O(n)$ time. It's important to note the amount of remaining points is at most $n - 2$ since at least the two points forming the bridge will remain, as well as only the points on the convex hull can remain.
+3. As in step 1, we need to iterate through all the points to remove all of them not satisfying the condition (being above the bridge, $y >= u_x x + u_y$). $O(n)$ time. It's important to note the amount of remaining points is at most $n - 2$ since at least the two points forming the bridge will remain, as well as only the points on the convex hull can remain.
 4. Finally the algorithm is called twice on the two new halves that have respectively at most $n/2$ points to analyze. We can give a better bound on the number of points, since we know that only the points on the convex hull can remain, and we know that the convex hull has $h$ points. So we can say that each half will have at maximum $n/2$ points but also at maximum $h-1$ points.
 
 Putting everything together we can write the following recurrence relation:
