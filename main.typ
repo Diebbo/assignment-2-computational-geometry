@@ -32,7 +32,7 @@ MbC(P : ℓ, r):
 ```
 
 To prove that the total time is $O(n log h)$ we need to analyze each step of the function while also considering the recursive part.
-1. The first step require to go through all the n nodes in order to calculate the middle point. $O(n)$ time.
+1. The first step requires to go through all the n nodes in order to calculate the middle point. $O(n)$ time.
 2. The second point is a little less trivial than the rest of them. To achieve this goal in $O(n)$ time we need to reduce the problem into Linear Programming. 
 
   Let's first remark how to set up a LP problem in a 2 dimensional space. We have two variables unknown $x_1, x_2$, and we want to maximise a function $c_1 x_1 + c_2 x_2$. At the same time we have a set of $m$ constraints:
