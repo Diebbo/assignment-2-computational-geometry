@@ -32,7 +32,7 @@ MbC(P : ℓ, r):
 ```
 
 To prove that the total time is $O(n log h)$ we need to analyze each step of the function while also considering the recursive part.
-1. The first step requires to go through all the n nodes in order to calculate the middle point. $O(n)$ time.
+1. By assuming that the points in the input array are already sorted by x-coordinate, finding the median can be done in $O(1)$ time. Partitioning the points into two halves can be done in $O(n)$ time by iterating through all the points and adding them to the left or right half depending on their x-coordinate. So the total time for this step is $O(n)$. The median point is called $p_m = (x_m, y_m)$.
 2. The second point is a little less trivial than the rest of them. To achieve this goal in $O(n)$ time, we need to reduce the problem into Linear Programming. 
 
   Let's first remark how to set up a LP problem in a 2 dimensional space. We have two variables unknown $x_1, x_2$, and we want to maximise a function $c_1 x_1 + c_2 x_2$. At the same time we have a set of $m$ constraints:
@@ -46,29 +46,46 @@ To prove that the total time is $O(n log h)$ we need to analyze each step of the
   If we consider for our problem the following:
   - $x_1$ as the slope of the line
   - $x_2$ as the y-intercept of the line
-  - $c_1 = 0$ and $c_2 = 1$
+  - $c_1 = -x_m $ (the slope of the line connecting the two median points), $c_2 = -1$ . They both have a negative sign because we want to minimize the $x_1 dot x_m + x_2$.
   - each point $p_i = (p_(i,x), p_(i,y))$ as a constraint $p_(i,x) x_1 + x_2 >= p_(i,y)$
   - $m = n$ (the number of points)
   
-  We can see that the solution of this LP problem will give us the line with the maximum y-intercept that is above all the points, which is exactly what we want.
+  We can see that the solution of this LP problem will give us the line with the minimum y-intercept in the coordinate $x=x_m$ that is above all the points, which is exactly what we want.
   Since we have $n$ constraints and we are in a 2 dimensional space, we can solve this LP problem in $O(n)$ time using Megiddo's algorithm.
 
-3. As in step 1, we need to iterate through all the points to remove all of them not satisfying the condition (being above the bridge, $y >= u_x x + u_y$). $O(n)$ time. It's important to note the amount of remaining points is at most $n - 2$ since at least the two points forming the bridge will remain, as well as only the points on the convex hull can remain.
-4. Finally the algorithm is called twice on the two new halves that have respectively at most $n/2$ points to analyze. We can give a better bound on the number of points, since we know that only the points on the convex hull can remain, and we know that the convex hull has $h$ points. So we can say that each half will have at maximum $n/2$ points but also at maximum $h-1$ points.
+  At last we calculate the two points $u$ and $v$ that are the point on the line with respectively the minimum and maximum x-coordinate.
+
+3. As in step 1, we need to iterate through all the points to remove all of them not satisfying the condition (being under the bridge): $O(n)$ time. It's important to note the amount of remaining points is at most $n - 2$ since at least the two points forming the bridge will remain, as well as only the points on the convex hull can remain.
+
+4. Finally the algorithm is called twice on the two new halves that have respectively at most $n\/2$ points to analyze.
 
 Putting everything together we can write the following recurrence relation:
-$T(n, h) = T(n_1, h_1) + T(n_2, h_2) + O(n)$ where $n_1 + n_2 <= n - 2$ and $h_1 + h_2 <= h - 1$. Thus, if we take a closer look at the recursion tree we can see that we will have at maximum $h$ levels (since at each level we reduce the number of points on the convex hull by at least one) and at each level we do $O(n)$ work. So the total time will be $O(n log h)$.
+$T(n, h) = T(n_1, h_1) + T(n_2, h_2) + O(n)$ where $n_1 + n_2 <= n$ and $h_1 + h_2 <= h - 1$ and $n_1 <= ceil(n / 2)$ and $n_2 <= floor(n \/ 2)$. 
+Therefore, we can consider the worst case where $n_1 = n_2 = n \/ 2$ and $h_1 + h_2 = h - 1$. Thus we can simplify the relation to:
+$T(n, h) = 2 T(n\/2, h - 1) + O(n)$.
 
+At each level, there're at least $2^j$ subproblems, each removing at least one point from the convex hull. Therefore, after $L$ levels, we have $>= 2^L$ points removed from the convex hull and when $2^L >= h$ the process ends. This means that the height of the recursion tree is at most $log(h)$.
+
+At each level, we do $O(n)$ work, therefore the total time is $O(n log h)$.
 
 *b. 
 We consider $x_1 < dots < x_h$ the points of the upper hull and let $n_i$ be the number of points $p=(x,y)$ such that $x_i < x < x_(i+1)$ for $i = 1, ... , h-1$. Show that the upper hull computation in the Marriage before Conquest algorithm runs in time
 $ O(sum_(i=1)^(h-1) n_i log (n / n_i)) $.*
 
-To prove this we will use the same reasoning as before for the recurrence relation, but this time we will consider the number of points in each interval between two consecutive points on the convex hull.
+Let us fix an interval $I_i = (x_i, x_(i+1))$ for some $i$ in $1, ..., h-1$, containing $n_i$ points.
+After the first division, each recursive subproblem contains at most $n/2$ points. Therefore, at level $t$ of the recursion tree, any subproblem contains at most $n/2^t$ points.
 
-We can write the following recurrence relation:
-$T(n, h) = T(n_1, h_1) + T(n_2, h_2) + O(n)$ 
+A point belonging to bucket $i$ stops being processed once the recursion reaches a level $t_i$ such that $n/2^(t_i) <= n_i$. More formally, the interval $I_i$ is still being processed at level $t$ only if the corresponding subproblem contains more than $α n_i$ points, for some constant $α > 1$. Hence:
 
-We cannot apply the Master Theorem directly since we have two variables, $n$ and $h$. However we can use the recursion tree to analyze the time complexity. The informal idea is that at each level of the tree we do $O(n_i)$ work (to check for all the points in the interval) that we need to do for each of the $h-1$ intervals. Because we are dealing with a binary tree, the height of the tree will be $O(log(n / n_i))$ for each interval. Thus, the total time will be the sum of the work done at each level of the tree for each interval, which is $O(sum_(i=1)^(h-1) n_i log (n / n_i))$.
+$
+n/2^t > alpha n_i
+=> 2^t < n/(α n_i)
+=> t < log(n/n_i) + O(1)
+$
 
+Therefore, each point in bucket $i$ is processed at most $O(log(n\/n_i))$ times.
+Since there are $n_i$ points in bucket $i$, the total amount of work for this bucket is $O(n_i log(n\/n_i))$. Summing over all buckets gives:
 
+$
+sum_(i=1)^(h-1) O(n_i log(n/n_i)) = O(sum_(i=1)^(h-1) n_i log(n/n_i))
+$
