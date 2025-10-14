@@ -60,11 +60,11 @@ To prove that the total time is $O(n log h)$ we need to analyze each step of the
 4. Finally the algorithm is called twice on the two new halves that have respectively at most $n\/2$ points to analyze.
 
 Putting everything together we can write the following recurrence relation:
-$T(n, h) = T(n_1, h_1) + T(n_2, h_2) + O(n)$ where $n_1 + n_2 <= n$ and $h_1 + h_2 <= h - 1$ and $n_1 <= ceil(n / 2)$ and $n_2 <= floor(n \/ 2)$. 
-Therefore, we can consider the worst case where $n_1 = n_2 = n \/ 2$ and $h_1 + h_2 = h - 1$. Thus we can simplify the relation to:
+$T(n, h) = T(n_1, h_1) + T(n_2, h_2) + O(n)$ where $n_1 + n_2 <= n$ and $h_1 + h_2 = h - 1$ and $n_1 <= ceil(n / 2)$ and $n_2 <= floor(n \/ 2)$. 
+Therefore, we can consider the worst case where no points can be removed in step 3, so we have $n_1 = n_2 = n \/ 2$ and $h_1 + h_2 = h - 1$. Thus we can simplify the relation to:
 $T(n, h) = 2 T(n\/2, h - 1) + O(n)$.
 
-At each level, there're at least $2^j$ subproblems, each removing at least one point from the convex hull. Therefore, after $L$ levels, we have $>= 2^L$ points removed from the convex hull and when $2^L >= h$ the process ends. This means that the height of the recursion tree is at most $log(h)$.
+At each level, there're at most $2^j$ subproblems, each of size at most $n/2^j$ and each removing one edge from the convex hull. There will be at most $h$ total considered subproblems. In the worst case, there will be exactly $2^j$ subproblems at level $j$. Hence, after $L$ levels, we have $>= 2^L$ edges removed from the convex hull (which has $h-1$ total edges) and when $2^L >= h$ the process ends. This means that the height of the recursion tree is at most $log(h)$.
 
 At each level, we do $O(n)$ work, therefore the total time is $O(n log h)$.
 
