@@ -31,6 +31,10 @@ For showing this, we will use a theorem: \
 If it exists a line #l that stabs a set of segment #ss, then there exists a line $#l'$ that stabs #ss and passes through at least one endpoint of segments in #ss.
 
 *Proof of Theorem 1*:
+/* The proof is too long to fit in the margin, so we'll skip it */
+
+
+/* Bruh */
 Let us assume that there exists a line #l that stabs a set of segments #ss, and that #l doesn't pass through any endpoint of segments in #ss. We can then choose a fixed point $P$ on the line and rotate the line #l around this point, until it passes through an endpoint of a segment in #ss. Since the line was intersecting all the segments before the rotation, and we rotated it around its center, it will still be intersecting all the segments after the rotation. Therefore, we have found a line $#l'$ that stabs #ss and passes through at least one endpoint of segments in #ss.
 If, after the rotation, the line isn't intersecting all the segments anymore, this means we already passed through an endpoint, hence having already obtained a valid line $#l'$. 
 
