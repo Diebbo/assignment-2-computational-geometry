@@ -13,7 +13,7 @@ stabbed if there exists a line $cal(l)$ that intersects all the segments in #ss.
 We define the line #l as $y = m x + q$. To check whether the line #l intersects a vertical segment #vv, that can be defined as a triplets $(x_vv, y^1_vv, y^2_vv)$ where $y^1_vv < y^2_vv$, we need to check whether the following condition holds: 
 $y^1_vv <= m x_vv + q <= y^2_vv$.
 
-Therefor we can define an LP problem, that will actually be just a constraint problem:
+Therefore, we can define an LP problem, that will actually be just a constraint problem:
 - Maximise: $0$
 - Subject to the constraints:
   - $m x_vv + q >= y^1_vv$ $quad forall$ #vv in #ss
