@@ -33,7 +33,7 @@ let $T$ be the topmost intersection between the two circles bordering the lens.
 
 Then, the area of the intersection between the two shapes is the sum of the following:
 - the area of the triangle $"ITJ"$;
-- the area of the circular sector defined on the left circle by the chord $"IT"$; and
+- the area of the circular sector defined on the left circle by the chord $"IT"$;
 - the area of the circular sector defined on the right circle by the chord $"TJ"$.
 
 #figure(
