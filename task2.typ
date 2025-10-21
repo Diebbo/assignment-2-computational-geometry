@@ -29,7 +29,7 @@ Consider, for example, the first category.
 Let $I,J$ be the points of intersection between
 the two shapes' perimeters, on the left and right side respectively.
 Let $C_l, C_r$ be the centers of the two circles on which $I$ and $J$ sit.
-let $T$ be the topmost intersection between the two circles bordering the lens.
+Let $T$ be the topmost intersection between the two circles bordering the lens.
 
 Then, the area of the intersection between the two shapes is the sum of the following:
 - the area of the triangle $"ITJ"$;
