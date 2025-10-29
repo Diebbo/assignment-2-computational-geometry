@@ -6,26 +6,17 @@ Show that there exists a point $q$ with halfspace depth at least $Omega(n)$.
 
 Before starting the proof, we need to assume that we're bounding the considered area with a convex shape (a square) that contains all the points in $P$.
 
-To prove that the there exists a point $q$ with halfspace depth $Omega(n)$, we need to first divide the plane in two regions by a line $l$ such that each region contains at least $n/2$ points.
-For simplicity, we can assume that $l$ is vertical and it will divide along the median x-coordinate of the points in $P$.
+To prove that the there exists a point $q$ with halfspace depth $Omega(n)$, we need to first divide the plane in two regions by a line $l$ such that each region contains at least $floor(n/2)$ points.
+We consider $l$ as the vertical line situated on the median x-coordinate of the points in $P$. Thus, $l$ will have at least $floor(n/2)$ points on each side and we will consider theme as two different sets of points.
 
-Because we are looking for an $n/4$ upper bound, we are reducing the problem into showing the existence of a second line $ell$ such that it divides the two regions created by $l$ in two halves.
+By the 2-dimensional case of the *ham sandwich theorem*, also known as pancake theorem, we know that exists a line $r$ that divides each one of two sets of points in half.
 
-To do so, we will consider the dual of the points in $P$.
+Assuming that there are no three points of $P$ on the same line, the two lines can't be parallel:
+if $r$ was vertical, than it would be either on the left side of $l$ or the right side, hence it couldn't split in half, respectively, the right set of points defined by $l$ or the right one. If $l = r$, then it wouldn't split any set.
 
-In the dual space, each point $p_i = (x_i, y_i)$ is represented by a line $l_i: y = x_i * x - y_i$. 
+Since the lines aren't parallel, there will be a point $q$ where they will intersect. The two lines will divide the plane in four regions and, by construction, each one of them will contain at least $floor(n/4)$ points of P.
 
-Therefore, we need to find a point $q*$ in the dual space such that:
-- in the left half-plane ($x < x_"median"$): $q*$ is below at least $n/4$ lines
-- in the right half-plane ($x > x_"median"$): $q*$ is above at least $n/4$ lines
-
-By the 2 dimension variation of the Ham Sandwich Theorem, we know that there exists a line that divides two sets of points in two halves.
-
-Hence, we can apply the theorem to the set of intersection points of the lines in the dual space with the vertical line $x = x_"median"$ and find a line that divides the intersection points in two halves.
-
-By doing so, we are able to find the point $q*$ that satisfies the two conditions above.
-
-// Finding the lines becomes easy as can be stated as an LP problem.
+Every line that goes through $q$ will divide the plane in two half-plane, and each one of them will contain at least a whole region defined by the two lines $l$ and $r$. Therefore, every half-plane defined by a line that goes through $q$ will contain at least $floor(n/4)$ points, hence $q$ has halfspace depth of at least $floor(n/4) = Omega(n)$
 
 $square$
 
