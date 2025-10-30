@@ -4,7 +4,7 @@
   title: "Computational Geometry (2025) Theory Questions",
   authors: (
     (name: "Diego Barbieri", email: "au802245@uni.au.dk", affiliation: "Aarhus University"),
-    (name: "Gioele Scandaletti", email: "au802245@uni.au.dk", affiliation: "Aarhus University"),
+    (name: "Gioele Scandaletti", email: "au803277@uni.au.dk", affiliation: "Aarhus University"),
     (name: "Samuele Esposito", email: "au803278@uni.au.dk", affiliation: "Aarhus University"),
   ),
   // Insert your abstract after the colon, wrapped in brackets.
