@@ -20,7 +20,7 @@
 #line(length: 100%)
 
 #include "task1.typ"
-
+#include "task2.typ"
 #include "task3.typ"
 
 #include "task4.typ"
