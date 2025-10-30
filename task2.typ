@@ -36,21 +36,23 @@ Then, the area of the intersection between the two shapes is the sum of the foll
 - the area of the circular segment defined on the left circle by the chord $"IT"$;
 - the area of the circular segment defined on the right circle by the chord $"TJ"$.
 
-To calculate the area of a triangle $I T J$,
-choose any two of the three vertices,
-and draw a line segment $b$ between them.
-Then, draw the smallest possible segment that goes from the
-third vertex to the infinite line that is the continuation of $b$,
-and call it $h$.
-The area of $I T J$ is then $ (b h) / 2 $
+To calculate the area of a triangle $A B C$,
+use the formula
+$
+  "Area"_(A B C) = 1/2 abs(
+    (x_A - x_C)(y_B - y_A) -
+    (x_A - x_B)(y_C - y_A)
+  )
+$
 
 To calculate the area of the circular segment
-defined on a circle with center $C$ and radius $r$
-by the chord $I J$,
-firstly calculate the angle $theta$ between $I$, $C$ and $J$.
-Then, calculate the area of a circular *sector* with center $C$, radius $r$, and angle $theta$:
+defined on a circle with center $C$
+by the chord $A B$,
+firstly calculate the angle $theta$ between $A$, $C$ and $B$.
+Then, calculate the area of a circular *sector* with center $C$, radius $overline(A B)$, and angle $theta$
+using the following formula:
 $ A_"sector" = (pi r^2 theta) / (2 pi) = (r^2 theta) / 2 $
-Finally, subtract the area of the triangle $I C J$
+Finally, subtract the area of the triangle $A B C$
 from the area of the circle sector to get the area of the circle segment.
 
 #figure(
